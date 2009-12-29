@@ -20,8 +20,8 @@ package test;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import josejamilena.comun.codec.B64;
-import josejamilena.comun.codec.B64Codec;
+import es.jamisoft.comun.codec.B64;
+import es.jamisoft.comun.codec.B64Codec;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.EncoderException;
