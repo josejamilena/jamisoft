@@ -198,9 +198,9 @@ public class Zip {
     public static void main(String args[]) {
         System.out.println("antes");
 
-        Zip z = new Zip("f:\\bdDes.zip");
+        Jar z = new Jar("c:/bdDes.zip");
 
-        z.descomprimir("c:\\PRUD");
+        z.comprimir("c:/Cabsdk");
         System.out.println("fin de descomprimir...");
     }
 }
