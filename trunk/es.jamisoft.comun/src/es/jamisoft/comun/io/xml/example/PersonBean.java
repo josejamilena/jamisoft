@@ -16,7 +16,7 @@
 
 
 
-package example;
+package es.jamisoft.comun.io.xml.example;
 
 public class PersonBean {
     private int    age;
