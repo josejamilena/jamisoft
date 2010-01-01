@@ -16,11 +16,11 @@
 
 
 
-package example;
+package es.jamisoft.comun.io.xml.example;
 
 //~--- non-JDK imports --------------------------------------------------------
 
-import org.apache.commons.betwixt.io.BeanWriter;
+import es.jamisoft.comun.io.xml.BeanWriter;
 
 //~--- JDK imports ------------------------------------------------------------
 

@@ -1,9 +1,13 @@
 /*
  * Copyright (C) The Apache Software Foundation. All rights reserved.
  */
+
+
+
 package com.klopotek.utils.log;
 
 //~--- non-JDK imports --------------------------------------------------------
+
 import org.apache.log4j.*;
 import org.apache.log4j.helpers.*;
 import org.apache.log4j.spi.*;
@@ -15,32 +19,33 @@ import java.sql.*;
 import java.util.*;
 
 //~--- classes ----------------------------------------------------------------
+
 /**
  * This is a default JDBCConnectionHandler used by JDBCAppender
  */
 class DefaultConnectionHandler implements JDBCConnectionHandler {
-
     Connection con = null;
 
     //~--- get methods --------------------------------------------------------
+
     public Connection getConnection() {
         return con;
     }
 
     public Connection getConnection(String _url, String _username, String _password) {
         try {
-            if ((con != null) && !con.isClosed()) {
+            if ((con != null) &&!con.isClosed()) {
                 con.close();
             }
 
             con = DriverManager.getConnection(_url, _username, _password);
             con.setAutoCommit(false);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
 
         return con;
     }
 }
+
 
 /**
  * The JDBCAppender, writes messages into a database
@@ -139,65 +144,83 @@ public class JDBCAppender extends AppenderSkeleton {
      * A buffer-option to define the size of the message-event-buffer
      */
     public static final String BUFFER_OPTION = "buffer";
+
     /**
      * A columns-option to describe the important columns of the table
      */
     public static final String COLUMNS_OPTION = "columns";
+
     /**
      * A commit-option to define a auto-commitment
      */
     public static final String COMMIT_OPTION = "commit";
+
     /**
      * A connector-option to specify your own JDBCConnectionHandler
      */
     public static final String CONNECTOR_OPTION = "connector";
+
     /**
      * A database-option to set the user's password.
      */
     public static final String PASSWORD_OPTION = "password";
+
     /**
      * A sql-option to specify a static sql-statement which will be performed with every occuring message-event
      */
     public static final String SQL_OPTION = "sql";
+
     /**
      * A table-option to specify a table contained by the database
      */
     public static final String TABLE_OPTION = "table";
+
     /**
      * A database-option to to set a database url of the form jdbc:subprotocol:subname.
      */
     public static final String URL_OPTION = "url";
+
     /**
      * A database-option to set the database user on whose behalf the connection is being made.
      */
     public static final String USERNAME_OPTION = "username";
+
     //~--- fields -------------------------------------------------------------
+
     private int buffer_size = 1;
+
     // Database-connection
-    private Connection con = null;
+    private Connection            con               = null;
     private JDBCConnectionHandler connectionHandler = null;
-    private String connection_class = null;
-    private String password = null;
-    private String sql = null;
-    private String table = null;
+    private String                connection_class  = null;
+    private String                password          = null;
+    private String                sql               = null;
+    private String                table             = null;
+
     // Variables to store the options values setted by setOption() :
-    private String url = null;
+    private String url      = null;
     private String username = null;
+
     // A flag to indicate that everything is ready to get append()-commands.
     private boolean ready = false;
+
     // This class encapsulate the logic which is necessary to log into a table
-    private JDBCLogger jlogger = new JDBCLogger();
-    private boolean docommit = true;
+    private JDBCLogger jlogger  = new JDBCLogger();
+    private boolean    docommit = true;
+
     // Flags :
     // A flag to indicate a established database connection
     private boolean connected = false;
+
     // A flag to indicate configuration status
     private boolean configured = false;
+
     // This buffer stores message-events.
     // When the buffer_size is reached, the buffer will be flushed and the messages will updated to the database.
     private ArrayList buffer = new ArrayList();
 
     //~--- methods ------------------------------------------------------------
+
     /**
      * If program terminates close the database-connection and flush the buffer
      */
@@ -207,25 +230,27 @@ public class JDBCAppender extends AppenderSkeleton {
     }
 
     //~--- get methods --------------------------------------------------------
+
     /**
      * Internal method. Returns a array of strings containing the available options which can be set with method setOption()
      */
     public String[] getOptionStrings() {
 
         // The sequence of options in this string is important, because setOption() is called this way ...
-        return new String[]{
-                    CONNECTOR_OPTION, URL_OPTION, USERNAME_OPTION, PASSWORD_OPTION, SQL_OPTION, TABLE_OPTION, COLUMNS_OPTION,
-                    BUFFER_OPTION, COMMIT_OPTION
-                };
+        return new String[] {
+            CONNECTOR_OPTION, URL_OPTION, USERNAME_OPTION, PASSWORD_OPTION, SQL_OPTION, TABLE_OPTION, COLUMNS_OPTION,
+            BUFFER_OPTION, COMMIT_OPTION
+        };
     }
 
     //~--- set methods --------------------------------------------------------
+
     /**
      * Sets all necessary options
      */
     public void setOption(String _option, String _value) {
         _option = _option.trim();
-        _value = _value.trim();
+        _value  = _value.trim();
 
         if ((_option == null) || (_value == null)) {
             return;
@@ -266,18 +291,18 @@ public class JDBCAppender extends AppenderSkeleton {
                 return;
             }
 
-            String name = null;
-            int logtype = -1;
-            String value = null;
-            String column = null;
-            String arg = null;
-            int num_args = 0;
-            int num_columns = 0;
+            String          name        = null;
+            int             logtype     = -1;
+            String          value       = null;
+            String          column      = null;
+            String          arg         = null;
+            int             num_args    = 0;
+            int             num_columns = 0;
             StringTokenizer st_col;
             StringTokenizer st_arg;
 
             // Columns are TAB-separated
-            st_col = new StringTokenizer(_value, " ");
+            st_col      = new StringTokenizer(_value, " ");
             num_columns = st_col.countTokens();
 
             if (num_columns < 1) {
@@ -290,7 +315,7 @@ public class JDBCAppender extends AppenderSkeleton {
                 column = st_col.nextToken();
 
                 // Arguments are ~-separated
-                st_arg = new StringTokenizer(column, "~");
+                st_arg   = new StringTokenizer(column, "~");
                 num_args = st_arg.countTokens();
 
                 if (num_args < 2) {
@@ -313,7 +338,7 @@ public class JDBCAppender extends AppenderSkeleton {
 
                         if (!LogType.isLogType(logtype)) {
                             errorHandler.error("JDBCAppender::setOption(), Invalid COLUMN_OPTION LogType : " + arg
-                                    + " !");
+                                               + " !");
 
                             return;
                         }
@@ -346,6 +371,7 @@ public class JDBCAppender extends AppenderSkeleton {
     }
 
     //~--- methods ------------------------------------------------------------
+
     /**
      * Internal method. Returns true, you may define your own layout...
      */
@@ -371,6 +397,7 @@ public class JDBCAppender extends AppenderSkeleton {
     }
 
     //~--- set methods --------------------------------------------------------
+
     /**
      * You have to call this function for all provided columns of your log-table !
      */
@@ -397,6 +424,7 @@ public class JDBCAppender extends AppenderSkeleton {
     }
 
     //~--- methods ------------------------------------------------------------
+
     /**
      * Internal method. Appends the message to the database table.
      */
@@ -444,8 +472,7 @@ public class JDBCAppender extends AppenderSkeleton {
 
             try {
                 con.rollback();
-            } catch (Exception ex) {
-            }
+            } catch (Exception ex) {}
 
             return;
         }
@@ -534,7 +561,7 @@ public class JDBCAppender extends AppenderSkeleton {
                 connect();
             } catch (Exception e) {
                 connection_class = null;
-                url = null;
+                url              = null;
                 errorHandler.error("JDBCAppender::configure(), " + e);
 
                 return false;
