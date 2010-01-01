@@ -30,7 +30,7 @@ import java.io.Writer;
  * @see org.apache.commons.betwixt.io.BeanWriter
  * @author Jose Antonio Jamilena Daza
  */
-public class BeanWriter extends org.apache.commons.betwixt.io.BeanWriter {
+public class BeanWriter extends org.apache.commons.betwixt.io.BeanWriter implements es.jamisoft.comun.io.xml.interfaces.IBeanWriter {
     public BeanWriter() {
         super();
     }

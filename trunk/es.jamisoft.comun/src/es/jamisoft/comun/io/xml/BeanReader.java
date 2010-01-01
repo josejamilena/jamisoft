@@ -32,7 +32,7 @@ import javax.xml.parsers.SAXParser;
  * @see org.apache.commons.betwixt.io.BeanReader
  * @author Jose Antonio Jamilena Daza
  */
-public class BeanReader extends org.apache.commons.betwixt.io.BeanReader {
+public class BeanReader extends org.apache.commons.betwixt.io.BeanReader implements es.jamisoft.comun.io.xml.interfaces.IBeanReader {
     public BeanReader() {
         super();
     }
