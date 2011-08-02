@@ -363,7 +363,7 @@ public class UdpSingleton implements IUdp {
                     Abort = true;
                     logger.error(e);
                 } finally {
-                     UdpSingleton.setUdpListener(null); /* NO TOCAR, ME CAGO EN MI VIDA. */
+//                    UdpSingleton.setUdpListener(null);
                 }
             }
         }
