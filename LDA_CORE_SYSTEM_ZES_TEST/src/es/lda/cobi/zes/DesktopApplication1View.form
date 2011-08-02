@@ -18,7 +18,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="btnConnect" min="-2" pref="43" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -31,10 +31,9 @@
                           <Component id="btnDispose" min="-2" pref="43" max="-2" attributes="1"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="btnClose" min="-2" pref="43" max="-2" attributes="2"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnRefresh" min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace min="434" pref="434" max="434" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="estado" min="-2" pref="37" max="-2" attributes="0"/>
@@ -55,7 +54,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" max="-2" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnRefresh" min="0" pref="0" max="32767" attributes="1"/>
                       <Component id="btnConnect" alignment="0" pref="42" max="32767" attributes="1"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -65,23 +63,23 @@
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnDisconnect" alignment="0" pref="42" max="32767" attributes="1"/>
-                      <Component id="btnDispose" alignment="0" pref="42" max="32767" attributes="1"/>
+                      <Component id="btnDispose" alignment="0" min="-2" pref="42" max="-2" attributes="1"/>
                       <Component id="btnClose" min="0" pref="42" max="32767" attributes="1"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="289" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
                           <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTabbedPane1" min="-2" pref="275" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTConsole" max="32767" attributes="1"/>
-                              <Component id="estado" alignment="0" min="-2" pref="38" max="-2" attributes="1"/>
-                          </Group>
                       </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jTConsole" max="32767" attributes="1"/>
+                      <Component id="estado" alignment="0" min="-2" pref="38" max="-2" attributes="1"/>
                   </Group>
                   <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
               </Group>
@@ -1898,23 +1896,6 @@
             <Property name="foreground" type="java.awt.Color" resourceKey="jTInput.foreground"/>
             <Property name="text" type="java.lang.String" resourceKey="jTInput.text"/>
             <Property name="name" type="java.lang.String" value="jTInput" noResource="true"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnRefresh">
-          <Properties>
-            <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-              <action class="es.lda.cobi.zes.DesktopApplication1View" id="envioMonitor" methodName="envioMonitor"/>
-            </Property>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[65, 65]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[65, 65]"/>
-            </Property>
-            <Property name="name" type="java.lang.String" value="btnRefresh" noResource="true"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[65, 65]"/>
-            </Property>
           </Properties>
         </Component>
       </SubComponents>

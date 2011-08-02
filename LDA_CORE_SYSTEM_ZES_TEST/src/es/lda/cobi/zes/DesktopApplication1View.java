@@ -22,6 +22,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * The application's main frame.
@@ -182,7 +183,6 @@ public class DesktopApplication1View extends FrameView {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTConsole = new javax.swing.JTextField();
-        btnRefresh = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -1284,19 +1284,13 @@ public class DesktopApplication1View extends FrameView {
         jTConsole.setText(resourceMap.getString("jTInput.text")); // NOI18N
         jTConsole.setName("jTInput"); // NOI18N
 
-        btnRefresh.setAction(actionMap.get("envioMonitor")); // NOI18N
-        btnRefresh.setMaximumSize(new java.awt.Dimension(65, 65));
-        btnRefresh.setMinimumSize(new java.awt.Dimension(65, 65));
-        btnRefresh.setName("btnRefresh"); // NOI18N
-        btnRefresh.setPreferredSize(new java.awt.Dimension(65, 65));
-
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1309,9 +1303,8 @@ public class DesktopApplication1View extends FrameView {
                         .addComponent(btnDispose, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addGap(434, 434, 434))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
                                 .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1326,7 +1319,6 @@ public class DesktopApplication1View extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnRefresh, 0, 0, Short.MAX_VALUE)
                     .addComponent(btnConnect, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1334,19 +1326,19 @@ public class DesktopApplication1View extends FrameView {
                             .addComponent(jLabel1))
                         .addGap(6, 6, 6))
                     .addComponent(btnDisconnect, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(btnDispose, javax.swing.GroupLayout.PREFERRED_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btnDispose, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnClose, 0, 42, Short.MAX_VALUE))
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(289, 289, 289)
+                        .addGap(266, 266, 266)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTConsole)
-                            .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTConsole)
+                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67))
         );
 
@@ -1509,7 +1501,6 @@ public class DesktopApplication1View extends FrameView {
     javax.swing.JButton btnPSetTonoFrec;
     javax.swing.JButton btnPSetTonoMaster;
     javax.swing.JButton btnPSetTxSubMap;
-    javax.swing.JButton btnRefresh;
     public static javax.swing.JLabel estado;
     javax.swing.JButton jButton1;
     javax.swing.JButton jButton2;
@@ -1637,10 +1628,9 @@ public class DesktopApplication1View extends FrameView {
         btnPSetTonoMaster.setEnabled(false);
         btnPSetTxSubMap.setEnabled(false);
         btnMP3In.setEnabled(false);
-        btnRefresh.setEnabled(false);
     }
 
-    private void habilitarBotones() {        
+    private void habilitarBotones() {
         this.jTabbedPane1.setEnabled(true);
         PSetReset.setEnabled(true);
         btnClose.setEnabled(true);
@@ -1705,7 +1695,6 @@ public class DesktopApplication1View extends FrameView {
         btnPSetTonoMaster.setEnabled(true);
         btnPSetTxSubMap.setEnabled(true);
         btnMP3In.setEnabled(true);
-        btnRefresh.setEnabled(true);        
     }
 
     private void ini() {
@@ -1758,7 +1747,7 @@ public class DesktopApplication1View extends FrameView {
                     jLConsole.setText("ERROR DE CONEXIÓN.");
                 } else {
                     System.err.println(TimeStamp.now() + " " + (Integer) o);
-                    if (((Integer) o).intValue() == ZESStatus.OK) {
+                    if (1 == ZESStatus.OK) {
                         estado.setIcon(new ImageIcon(getClass().getResource(java.util.ResourceBundle.getBundle("es/lda/cobi/zes/resources/DesktopApplication1View").getString("CONNECTED_STATUS"))));
                     } else {
                         estado.setIcon(new ImageIcon(getClass().getResource(java.util.ResourceBundle.getBundle("es/lda/cobi/zes/resources/DesktopApplication1View").getString("CANCEL"))));
@@ -2552,7 +2541,7 @@ public class DesktopApplication1View extends FrameView {
             String[] args = new String[3];
             args[0] = "1";
             args[1] = "1";
-            args[2] = "1";
+            args[2] = "1";            
             Object o = a.exec("PSetConfigCierres", args, null)[0];
             jLConsole.setText(ZESStatus.return2String((Integer) o).toString());
         } catch (DriverException ex) {
@@ -2626,9 +2615,9 @@ public class DesktopApplication1View extends FrameView {
     public void PSetMP3() {
         try {
             String[] args = new String[3];
-            args[0] = "True";
+            args[0] = "1";
             args[1] = "1";
-            args[2] = "1";
+            args[2] = "1";           
             Object o = a.exec("PSetMP3", args, null)[0];
             jLConsole.setText(ZESStatus.return2String((Integer) o).toString());
         } catch (DriverException ex) {
@@ -2659,7 +2648,7 @@ public class DesktopApplication1View extends FrameView {
             String[] args = new String[3];
             args[0] = "1";
             args[1] = "1";
-            args[2] = "1";
+            args[2] = "1";    
             Object o = a.exec("PSetReset", args, null)[0];
             jLConsole.setText(ZESStatus.return2String((Integer) o).toString());
         } catch (DriverException ex) {
@@ -2675,7 +2664,7 @@ public class DesktopApplication1View extends FrameView {
             String[] args = new String[3];
             args[0] = "1";
             args[1] = "1";
-            args[2] = "1";
+            args[2] = "1";    
             Object o = a.exec("PSetRxSubMap", args, null)[0];
             jLConsole.setText(ZESStatus.return2String((Integer) o).toString());
         } catch (DriverException ex) {
@@ -2751,7 +2740,7 @@ public class DesktopApplication1View extends FrameView {
             String[] args = new String[3];
             args[0] = "1";
             args[1] = "1";
-            args[2] = "1";
+            args[2] = "1";    
             Object o = a.exec("PSetTxSubMap", args, null)[0];
             jLConsole.setText(ZESStatus.return2String((Integer) o).toString());
         } catch (DriverException ex) {
@@ -2774,15 +2763,4 @@ public class DesktopApplication1View extends FrameView {
 //            ex.printStackTrace();
 //        }
 //    }
-
-    @Action
-    public void envioMonitor() {
-        try {
-            a.exec("envioMonitor", null, null);
-        } catch (DriverException ex) {
-            ex.printStackTrace();
-        } catch (UnsupportedDriverOperation ex) {
-            ex.printStackTrace();
-        }
-    }
 }
