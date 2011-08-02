@@ -1,1 +1,0 @@
-logger.debug("EXECUTING : " + Thread.currentThread().getStackTrace()[1].getMethodName());

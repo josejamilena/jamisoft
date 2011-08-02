@@ -1,7 +1,7 @@
 package es.lda.core.exception;
 
 /**
- * Driver Exception.
+ *
  * @author Jose Antonio
  */
 public class DriverException extends Exception {
@@ -20,4 +20,3 @@ public class DriverException extends Exception {
         super(msg);
     }
 }
-

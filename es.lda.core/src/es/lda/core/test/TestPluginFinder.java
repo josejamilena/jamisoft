@@ -17,7 +17,6 @@ public class TestPluginFinder {
                 Class temp = pluginFinder.searchImpl("./plugin", plugin);
                 System.out.println("Implementación Driver encontrado => " + temp.getName());
                 IDriver o = (IDriver) temp.newInstance();                
-                System.out.println(o.hashCode());
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

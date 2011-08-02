@@ -2,22 +2,19 @@ package es.lda.core.lib.driver.stv.impl;
 
 import es.lda.core.event.interfaces.DataEvent;
 import es.lda.core.exception.DriverException;
-import es.lda.core.exception.STVException;
-import es.lda.core.exception.UnsupportedDriverOperation;
 import es.lda.core.lib.driver.stv.STV;
-import es.lda.core.network.IUdp;
-import es.lda.core.network.UdpException;
-import es.lda.core.network.UdpFactory;
-import es.lda.core.network.UdpType;
+import es.lda.core.network.Udp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
 import javax.swing.Timer;
 import org.apache.log4j.Logger;
 
@@ -27,7 +24,7 @@ public class STVImpl implements STV {
      * Return Device Name.
      * @return Device Name.
      */
-    @Override    
+    @Override
     public String getDevice() {
         return config.getString("DEVICE");
     }
@@ -36,7 +33,7 @@ public class STVImpl implements STV {
      * Return Device Id.
      * @return Device Id.
      */
-    @Override    
+    @Override
     public String getDeviceId() {
         return config.getString("DEVICE_ID");
     }
@@ -45,7 +42,7 @@ public class STVImpl implements STV {
      * Return Device Version.
      * @return Device Version.
      */
-    @Override    
+    @Override
     public String getVersion() {
         return config.getString("VERSION");
     }
@@ -59,7 +56,7 @@ public class STVImpl implements STV {
      * void dispose(); </p>
      * boolean getAsyncConnect(); </p>
      * STVInfo getInfo(); </p>
-     * byte[] getNSupply(int i, int j); </p>
+     * byte[] getNSource(int i, int j); </p>
      * byte[] getNZone(int i, int j); </p>
      * String getSTVLog(); </p>
      * boolean getSyncConnect(); </p>
@@ -93,9 +90,9 @@ public class STVImpl implements STV {
      * byte setAmpToneEnable(byte channel, boolean enable); </p>
      * byte setCM2Enable(boolean enable); </p>
      * byte setCobraNet(byte channel, int addr_bundle, byte input_ch); </p>
-     * byte setCobraNetSupplyName(byte channel, String nombre); </p>
+     * byte setCobraNetSourceName(byte channel, String nombre); </p>
      * byte setCobraNetZoneName(byte channel, String nombre); </p>
-     * byte setDelayBootSupply(byte delay); </p>
+     * byte setDelayBootSource(byte delay); </p>
      * byte setDeleteFrontalLogo(); </p>
      * byte setEtherNetEnable(boolean enable); </p>
      * byte setFrontalLogo(byte[] logo); </p>
@@ -103,169 +100,132 @@ public class STVImpl implements STV {
      * byte setSDCardEnable(boolean enable); </p>
      * byte setSTVModeLimiter(byte mode); </p>
      * byte setSTVModel(byte model); </p>
-     * byte setSensingSupply(boolean enable); </p>
+     * byte setSettingSource(boolean enable); </p>
      * byte setSoftwareReset(); </p>
      * </code>
      */
     @Override
-    public Object[] exec(String cmd, String[] args, byte[] argsBytes) throws DriverException, UnsupportedDriverOperation {
+    public Object[] exec(String cmd, String[] args, byte[] argsBytes) {
         List<Object> res = new LinkedList<Object>();
-
-        logger.info("EXEC");
-        logger.info("\tcmd:  " + cmd);
-        logger.info("\targs: " + args);
-        logger.info("\targsBytes: " + argsBytes);
-
-
-//        try {
-        if (cmd.equalsIgnoreCase("connect")) {
-            res.add(connect(args[0]));
-        } else if (cmd.equalsIgnoreCase("dispose")) {
-            try {
+        
+        try {
+            if (cmd.equalsIgnoreCase("connect")) {
+                res.add(connect(args[0]));
+            } else if (cmd.equalsIgnoreCase("dispose")) {
                 dispose();
-            } catch (STVException ex) {
-                logger.error(ex.getMessage());
-                throw new DriverException("ERROR: " + ex.getMessage());
-            } catch (InterruptedException ex) {
-                logger.error(ex.getMessage());
-                throw new DriverException("ERROR: " + ex.getMessage());
-            }
-        } else if (cmd.equalsIgnoreCase("getAsyncConnect")) {
-            res.add(getAsyncConnect());
-        } else if (cmd.equalsIgnoreCase("getInfo")) {
-            res.add(getInfo());
-        } else if (cmd.equalsIgnoreCase("getNSupply")) {
-            res.add(getNSupply(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
-        } else if (cmd.equalsIgnoreCase("getNZone")) {
-            res.add(getNZone(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
-        } else if (cmd.equalsIgnoreCase("getSTVLog")) {
-            res.add(getSTVLog());
-        } else if (cmd.equalsIgnoreCase("getSyncConnect")) {
-            res.add(getSyncConnect());
-        } else if (cmd.equalsIgnoreCase("isIp")) {
-            res.add(isIp(args[0]));
-        } else if (cmd.equalsIgnoreCase("setAmpAllMute")) {
-            res.add(setAmpAllMute(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpChMute")) {
-            res.add(setAmpChMute(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpCobraNetPrio")) {
-            res.add(setAmpCobraNetPrio(Integer.parseInt(args[0]), Byte.parseByte(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpCobraNetPrioModeEnable")) {
-            res.add(setAmpCobraNetPrioModeEnable(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpDC")) {
-            res.add(setAmpDC(Byte.parseByte(args[0]), Short.parseShort(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpDecayLimiter")) {
-            res.add(setAmpDecayLimiter(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpEqualizer")) {
-            res.add(setAmpEqualizer(Byte.parseByte(args[0]), Byte.parseByte(args[1]), Byte.parseByte(args[2]),
-                    Integer.parseInt(args[3]), Integer.parseInt(args[4]), Byte.parseByte(args[5])));
-        } else if (cmd.equalsIgnoreCase("setAmpEqualizerEnable")) {
-            res.add(setAmpEqualizerEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpFilter")) {
-            res.add(setAmpFilter(Byte.parseByte(args[0]), Integer.parseInt(args[1]), Byte.parseByte(args[2])));
-        } else if (cmd.equalsIgnoreCase("setAmpFilterEnable")) {
-            res.add(setAmpFilterEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpFilterPrio")) {
-            res.add(setAmpFilterPrio(Byte.parseByte(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Byte.parseByte(args[3])));
-        } else if (cmd.equalsIgnoreCase("setAmpFrecTone")) {
-            res.add(setAmpFrecTone(Byte.parseByte(args[0]), Integer.parseInt(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpGain")) {
-            res.add(setAmpGain(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1]), Byte.parseByte(args[2])));
-        } else if (cmd.equalsIgnoreCase("setAmpGainLinearInput")) {
-            res.add(setAmpGainLinearInput(Byte.parseByte(args[0]), Short.parseShort(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpGainLinearPrioInput")) {
-            res.add(setAmpGainLinearPrioInput(Short.parseShort(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpGainPrio")) {
-            res.add(setAmpGainPrio(Byte.parseByte(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpGainTone")) {
-            res.add(setAmpGainTone(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpLevelPrioActive")) {
-            res.add(setAmpLevelPrioActive(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpLimiterEnable")) {
-            res.add(setAmpLimiterEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpLoudnessEnable")) {
-            res.add(setAmpLoudnessEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpModeAudioInput")) {
-            res.add(setAmpModeAudioInput(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpModePrioActive")) {
-            res.add(setAmpModePrioActive(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpPresets")) {
-            res.add(setAmpPresets(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpTCLimiter")) {
-            res.add(setAmpTCLimiter(Byte.parseByte(args[0]), Integer.parseInt(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpThresHoldActivePrio")) {
-            res.add(setAmpThresHoldActivePrio(Byte.parseByte(args[0])));
-        } else if (cmd.equalsIgnoreCase("setAmpThresholdLimiter")) {
-            res.add(setAmpThresholdLimiter(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
-        } else if (cmd.equalsIgnoreCase("setAmpToneEnable")) {
-            res.add(setAmpToneEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
-        } else if (cmd.equalsIgnoreCase("setCM2Enable")) {
-            res.add(setCM2Enable(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setCobraNet")) {
-            res.add(setCobraNet(Byte.parseByte(args[0]), Integer.parseInt(args[1]), Byte.parseByte(args[2])));
-        } else if (cmd.equalsIgnoreCase("setCobraNetSupplyName")) {
-            try {
-                res.add(setCobraNetSupplyName(Byte.parseByte(args[0]), args[1]));
-            } catch (STVException ex) {
-                logger.error(ex.getMessage());
-                throw new DriverException("ERROR: " + ex.getMessage());
-            } catch (UnsupportedEncodingException ex) {
-                logger.error(ex.getMessage());
-                throw new DriverException("ERROR: " + ex.getMessage());
-            }
-        } else if (cmd.equalsIgnoreCase("setCobraNetZoneName")) {
-            try {
+            } else if (cmd.equalsIgnoreCase("getAsyncConnect")) {
+                getAsyncConnect();
+            } else if (cmd.equalsIgnoreCase("getInfo")) {
+                res.add(getInfo());
+            } else if (cmd.equalsIgnoreCase("getNSource")) {
+                res.add(getNSource(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
+            } else if (cmd.equalsIgnoreCase("getNZone")) {
+                res.add(getNZone(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
+            } else if (cmd.equalsIgnoreCase("getSTVLog")) {
+                res.add(getSTVLog());
+            } else if (cmd.equalsIgnoreCase("getSyncConnect")) {
+                res.add(getSyncConnect());
+            } else if (cmd.equalsIgnoreCase("isIp")) {
+                res.add(isIp(args[0]));
+            } else if (cmd.equalsIgnoreCase("setAmpAllMute")) {
+                res.add(setAmpAllMute(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpChMute")) {
+                res.add(setAmpChMute(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpCobraNetPrio")) {
+                res.add(setAmpCobraNetPrio(Integer.parseInt(args[0]), Byte.parseByte(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpCobraNetPrioModeEnable")) {
+                res.add(setAmpCobraNetPrioModeEnable(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpDC")) {
+                res.add(setAmpDC(Byte.parseByte(args[0]), Short.parseShort(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpDecayLimiter")) {
+                res.add(setAmpDecayLimiter(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpEqualizer")) {
+                res.add(setAmpEqualizer(Byte.parseByte(args[0]), Byte.parseByte(args[1]), Byte.parseByte(args[2]),
+                        Integer.parseInt(args[3]), Integer.parseInt(args[4]), Byte.parseByte(args[5])));
+            } else if (cmd.equalsIgnoreCase("setAmpEqualizerEnable")) {
+                res.add(setAmpEqualizerEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpFilter")) {
+                res.add(setAmpFilter(Byte.parseByte(args[0]), Integer.parseInt(args[1]), Byte.parseByte(args[2])));
+            } else if (cmd.equalsIgnoreCase("setAmpFilterEnable")) {
+                res.add(setAmpFilterEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpFilterPrio")) {
+                res.add(setAmpFilterPrio(Byte.parseByte(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Byte.parseByte(args[3])));
+            } else if (cmd.equalsIgnoreCase("setAmpFrecTone")) {
+                res.add(setAmpFrecTone(Byte.parseByte(args[0]), Integer.parseInt(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpGain")) {
+                res.add(setAmpGain(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1]), Byte.parseByte(args[2])));
+            } else if (cmd.equalsIgnoreCase("setAmpGainLinearInput")) {
+                res.add(setAmpGainLinearInput(Byte.parseByte(args[0]), Short.parseShort(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpGainLinearPrioInput")) {
+                res.add(setAmpGainLinearPrioInput(Short.parseShort(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpGainPrio")) {
+                res.add(setAmpGainPrio(Byte.parseByte(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpGainTone")) {
+                res.add(setAmpGainTone(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpLevelPrioActive")) {
+                res.add(setAmpLevelPrioActive(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpLimiterEnable")) {
+                res.add(setAmpLimiterEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpLoudnessEnable")) {
+                res.add(setAmpLoudnessEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpModeAudioInput")) {
+                res.add(setAmpModeAudioInput(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpModePrioActive")) {
+                res.add(setAmpModePrioActive(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpPresets")) {
+                res.add(setAmpPresets(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpTCLimiter")) {
+                res.add(setAmpTCLimiter(Byte.parseByte(args[0]), Integer.parseInt(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpThresHoldActivePrio")) {
+                res.add(setAmpThresHoldActivePrio(Byte.parseByte(args[0])));
+            } else if (cmd.equalsIgnoreCase("setAmpThresholdLimiter")) {
+                res.add(setAmpThresholdLimiter(Byte.parseByte(args[0]), Byte.parseByte(args[1])));
+            } else if (cmd.equalsIgnoreCase("setAmpToneEnable")) {
+                res.add(setAmpToneEnable(Byte.parseByte(args[0]), Boolean.parseBoolean(args[1])));
+            } else if (cmd.equalsIgnoreCase("setCM2Enable")) {
+                res.add(setCM2Enable(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setCobraNet")) {
+                res.add(setCobraNet(Byte.parseByte(args[0]), Integer.parseInt(args[1]), Byte.parseByte(args[2])));
+            } else if (cmd.equalsIgnoreCase("setCobraNetSourceName")) {
+                res.add(setCobraNetSourceName(Byte.parseByte(args[0]), args[1]));
+            } else if (cmd.equalsIgnoreCase("setCobraNetZoneName")) {
                 res.add(setCobraNetZoneName(Byte.parseByte(args[0]), args[1]));
-            } catch (STVException ex) {
-                logger.error(ex.getMessage());
-                throw new DriverException("ERROR: " + ex.getMessage());
-            } catch (UnsupportedEncodingException ex) {
-                logger.error(ex.getMessage());
-                throw new DriverException("ERROR: " + ex.getMessage());
-            }
-        } else if (cmd.equalsIgnoreCase("setDelayBootSupply")) {
-            res.add(setDelayBootSupply(Byte.parseByte(args[0])));
-        } else if (cmd.equalsIgnoreCase("setDeleteFrontalLogo")) {
-            res.add(setDeleteFrontalLogo());
-        } else if (cmd.equalsIgnoreCase("setEtherNetEnable")) {
-            res.add(setEtherNetEnable(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setFrontalLogo")) {
-            res.add(setFrontalLogo(argsBytes));
-        } else if (cmd.equalsIgnoreCase("setPowerOn")) {
-            res.add(setPowerOn(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setSDCardEnable")) {
-            res.add(setSDCardEnable(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setSTVModeLimiter")) {
-            res.add(setSTVModeLimiter(Byte.parseByte(args[0])));
-        } else if (cmd.equalsIgnoreCase("setSTVModel")) {
-            res.add(setSTVModel(Byte.parseByte(args[0])));
-        } else if (cmd.equalsIgnoreCase("setSensingSupply")) {
-            res.add(setSensingSupply(Boolean.parseBoolean(args[0])));
-        } else if (cmd.equalsIgnoreCase("setSoftwareReset")) {
-            res.add(setSoftwareReset());
-        } else {
-            throw new UnsupportedDriverOperation(cmd, Arrays.asList(args));
+            } else if (cmd.equalsIgnoreCase("setDelayBootSource")) {
+                res.add(setDelayBootSource(Byte.parseByte(args[0])));
+            } else if (cmd.equalsIgnoreCase("setDeleteFrontalLogo")) {
+                res.add(setDeleteFrontalLogo());
+            } else if (cmd.equalsIgnoreCase("setEtherNetEnable")) {
+                res.add(setEtherNetEnable(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setFrontalLogo")) {
+                res.add(setFrontalLogo(argsBytes));
+            } else if (cmd.equalsIgnoreCase("setPowerOn")) {
+                res.add(setPowerOn(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setSDCardEnable")) {
+                res.add(setSDCardEnable(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setSTVModeLimiter")) {
+                res.add(setSTVModeLimiter(Byte.parseByte(args[0])));
+            } else if (cmd.equalsIgnoreCase("setSTVModel")) {
+                res.add(setSTVModel(Byte.parseByte(args[0])));
+            } else if (cmd.equalsIgnoreCase("setSettingSource")) {
+                res.add(setSettingSource(Boolean.parseBoolean(args[0])));
+            } else if (cmd.equalsIgnoreCase("setSettingSource")) {
+                res.add(setSoftwareReset());
+            }                        
+        } catch (DriverException ex) {
+            ex.printStackTrace();
+        } finally {
+            return res.toArray();
         }
-//        } catch (STVException ex) {
-//            logger.error(ex.getMessage());
-//            throw new DriverException("OPERATION ERROR: " + ex.getMessage());
-//        } catch (Exception ex) {
-//            logger.error(ex.getMessage());
-//            throw new DriverException("ERROR: " + ex.getMessage());            
-//        } finally {
-        logger.info("\tres: " + res);
-        logger.info("EXEC_END");
-        return res.toArray();
-//        }
     }
+    
     /** Logger. */
     private static Logger logger = Logger.getLogger(STVImpl.class);
     /** Load properties. */
     private static final ResourceBundle config = ResourceBundle.getBundle("es/lda/core/lib/driver/stv/config/config");
     /** Constants. */
-    private final byte STV_ERR_GENERICO = new Byte(config.getString("STV_ERR_GENERICO"));
-    private final byte STV_ERR_OK = new Byte(config.getString("STV_ERR_OK"));
-    private final byte STV_ERR_PARAM = new Byte(config.getString("STV_ERR_PARAM"));
+    public final byte STV_ERR_GENERICO = new Byte(config.getString("STV_ERR_GENERICO"));
+    public final byte STV_ERR_OK = new Byte(config.getString("STV_ERR_OK"));
+    public final byte STV_ERR_PARAM = new Byte(config.getString("STV_ERR_PARAM"));
     private final short STV_COMMAND_GET_INFO = Short.parseShort(config.getString("STV_COMMAND_GET_INFO"));
     private final short STV_COMMAND_GET_LOG = Short.parseShort(config.getString("STV_COMMAND_GET_LOG"));
     private final int STV_COMMAND_SET_ASINC = Integer.parseInt(config.getString("STV_COMMAND_SET_ASINC"));
@@ -326,12 +286,12 @@ public class STVImpl implements STV {
             while (!Abort) {
                 try {
                     sendSTVCommand();
-                } catch (NullPointerException ex) {
+                } catch (NullPointerException e) {
                     Abort = true;
-                    logger.error(ex);
-                } catch (Exception ex) {
+                    logger.error(e);
+                } catch (Exception e) {
                     Abort = true;
-                    logger.error(ex);
+                    logger.error(e);
                 }
             }
         }
@@ -381,8 +341,9 @@ public class STVImpl implements STV {
         STV_STRING_ERR[8][1] = config.getString("HIGH_ETX_TEMP");
     }
 
-    private void dispose()
-            throws STVException, InterruptedException {
+    @Override
+    public void dispose()
+            throws DriverException, InterruptedException {
         STV_ASINC_CONECTADO = false;
         STV_CONECTADO = false;
         STV_STRING_ERR = (String[][]) null;
@@ -435,209 +396,208 @@ public class STVImpl implements STV {
         }
     }
 
-    private boolean getSyncConnect()
-            throws STVException {
+    @Override
+    public boolean getSyncConnect()
+            throws DriverException {
         return STV_CONECTADO;
     }
 
-    private boolean getAsyncConnect()
-            throws STVException {
+    @Override
+    public boolean getAsyncConnect()
+            throws DriverException {
         return STV_ASINC_CONECTADO;
     }
 
-    private STVInfo getInfo()
-            throws STVException {
+    @Override
+    public STVInfo getInfo()
+            throws DriverException {
         return STV_Info;
     }
 
-    private byte[] getNSupply(int i, int j) {
+    @Override
+    public byte[] getNSource(int i, int j) {
         int lon = cont(STV_Info.modAmp[i].Canal[j].Nombre_Fuente_Cobranet);
         byte aux[] = new byte[lon];
         System.arraycopy(STV_Info.modAmp[i].Canal[j].Nombre_Fuente_Cobranet, 0, aux, 0, lon);
         return aux;
     }
 
-    private byte[] getNZone(int i, int j) {
+    @Override
+    public byte[] getNZone(int i, int j) {
         int lon = cont(STV_Info.modAmp[i].Canal[j].Nombre_Zona_Cobranet);
         byte aux[] = new byte[lon];
         System.arraycopy(STV_Info.modAmp[i].Canal[j].Nombre_Zona_Cobranet, 0, aux, 0, lon);
         return aux;
     }
 
-    private byte connect(String IP)
-            throws STVException, DriverException {
+    @Override
+    public byte connect(String IP)
+            throws DriverException {
         byte r = 0;
         if (isIp(IP)) {
             if (Semaforo_Lista_STV == null) {
                 Semaforo_Lista_STV = new Semaphore(1);
             }
             if (sckSinc == null) {
-                try {
-                    sckSinc  = UdpFactory.getInstance(UdpType.UDP_MULTITHREAT);
-                    sckSinc.setRemotePort(60000);
-                    sckSinc.setRemoteHost(IP);
-                    sckSinc.bind();
-                    sckAsinc = UdpFactory.getInstance(UdpType.UDP_MULTITHREAT);
-                    sckAsinc.setRemotePort(61000);
-                    sckAsinc.setRemoteHost(IP);
-                    sckAsinc.bind();
-                    DataEvent data = new DataEvent() {
-                        @Override
-                        public void dataArrival(short Bytestotal) {
-                            if (Bytestotal == 0) {
-                                return;
-                            }
-                            if (Procesando) {
-                                return;
-                            }
-                            byte comando[];
-                            Procesando = true;
-                            comando = new byte[Bytestotal];
-                            comando = sckSinc.getDataByte();
-                            if (comando.length < 8 || STV_COMANDO.Comando == null) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando.length != bv(comando[0]) * pow(2, 8) + bv(comando[1]) + 8) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando[2] != STV_COMANDO.Comando[2] || comando[3] != STV_COMANDO.Comando[3]) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando[4] != STV_COMANDO.Comando[4]) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando[4] != 1 && comando[4] != 2) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando[4] == 2 && (comando[6] != 79 || comando[7] != 75)) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            try {
-                                if (!checkSTVCheckSum(comando)) {
-                                    Procesando = false;
-                                    comando = null;
-                                    return;
-                                }
-                            } catch (Exception ex) {
-                                logger.error(ex);
-                            }
-                            try {
-                                if (tmrInfoDesconexion.isRunning()) {
-                                    tmrInfoDesconexion.stop();
-                                }
-                                tmrTimeOut.stop();
-                                STV_CONECTADO = true;
-                                if (STV_COMANDO.Comando[4] == 1) {
-                                    processSTVSyncCommand(comando);
-                                }
-                                clearSTVCommand();
-                                comando = null;
-                                Procesando = false;
-                            } catch (Exception ex) {
-                                logger.error(ex);
-                            }
+                sckSinc = new Udp();
+                sckSinc.setRemotePort(60000);
+                sckSinc.setRemoteHost(IP);
+                sckSinc.bind();
+                sckAsinc = new Udp();
+                sckAsinc.setRemotePort(61000);
+                sckAsinc.setRemoteHost(IP);
+                sckAsinc.bind();
+                DataEvent data = new DataEvent() {
+
+                    public void dataArrival(short Bytestotal) {
+                        if (Bytestotal == 0) {
                             return;
                         }
-                        boolean Procesando;
-                        final STVImpl this$0;
-
-                        {
-                            this$0 = STVImpl.this;
-
-                            Procesando = false;
-                        }
-                    };
-                    DataEvent data2 = new DataEvent() {
-                        @Override
-                        public void dataArrival(short Bytestotal) {
-                            if (Bytestotal == 0) {
-                                return;
-                            }
-                            if (Procesando) {
-                                return;
-                            }
-                            byte comando[];
-                            Procesando = true;
-                            comando = new byte[Bytestotal];
-                            comando = sckAsinc.getDataByte();
-                            if (comando.length < 8) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando.length != bv(comando[0]) * pow(2, 8) + bv(comando[1]) + 8) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando[4] != 1 && comando[4] != 2) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            if (comando[4] == 2 && (comando[6] != 79 || comando[7] != 75)) {
-                                comando = null;
-                                Procesando = false;
-                                return;
-                            }
-                            try {
-                                if (!checkSTVCheckSum(comando)) {
-                                    comando = null;
-                                    Procesando = false;
-                                    return;
-                                }
-                            } catch (Exception ex) {
-                                logger.error(ex);
-    //                            throw new STVException("DRIVER ERROR");
-                            }
-                            try {
-                                if (tmrInfoDesconexionAsinc.isRunning()) {
-                                    tmrInfoDesconexionAsinc.stop();
-                                }
-                                STV_ASINC_CONECTADO = true;
-                                STV_ASINC_INTENTOS = 0;
-                                if (comando[4] == 1) {
-                                    processSTVASyncCommand(comando);
-                                }
-                                comando = null;
-                                Procesando = false;
-                            } catch (Exception ex) {
-                                logger.error(ex);
-    //                            throw new STVException("DRIVER ERROR");
-                            }
+                        if (Procesando) {
                             return;
                         }
-                        boolean Procesando;
-                        final STVImpl this$0;
-
-                        {
-                            this$0 = STVImpl.this;
-
+                        byte comando[];
+                        Procesando = true;
+                        comando = new byte[Bytestotal];
+                        sckSinc.getDataByte(comando);
+                        if (comando.length < 8 || STV_COMANDO.Comando == null) {
+                            comando = null;
                             Procesando = false;
+                            return;
                         }
-                    };
-                    sckSinc.setListener(data);
-                    sckAsinc.setListener(data2);
-                    clearSTVCommand();
-                } catch (UdpException ex) {
-                    throw new DriverException(ex.getMessage());
-                }
+                        if (comando.length != bv(comando[0]) * pow(2, 8) + bv(comando[1]) + 8) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando[2] != STV_COMANDO.Comando[2] || comando[3] != STV_COMANDO.Comando[3]) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando[4] != STV_COMANDO.Comando[4]) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando[4] != 1 && comando[4] != 2) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando[4] == 2 && (comando[6] != 79 || comando[7] != 75)) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        try {
+                            if (!checkSTVCheckSum(comando)) {
+                                Procesando = false;
+                                comando = null;
+                                return;
+                            }
+                        } catch (Exception ex) {
+                            logger.error(ex);
+                        }
+                        try {
+                            if (tmrInfoDesconexion.isRunning()) {
+                                tmrInfoDesconexion.stop();
+                            }
+                            tmrTimeOut.stop();
+                            STV_CONECTADO = true;
+                            if (STV_COMANDO.Comando[4] == 1) {
+                                processSTVSyncCommand(comando);
+                            }
+                            clearSTVCommand();
+                            comando = null;
+                            Procesando = false;
+                        } catch (Exception e) {
+                        }
+                        return;
+                    }
+                    boolean Procesando;
+                    final STVImpl this$0;
+
+                    {
+                        this$0 = STVImpl.this;
+
+                        Procesando = false;
+                    }
+                };
+                DataEvent data2 = new DataEvent() {
+
+                    public void dataArrival(short Bytestotal) {
+                        if (Bytestotal == 0) {
+                            return;
+                        }
+                        if (Procesando) {
+                            return;
+                        }
+                        byte comando[];
+                        Procesando = true;
+                        comando = new byte[Bytestotal];
+                        sckAsinc.getDataByte(comando);
+                        if (comando.length < 8) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando.length != bv(comando[0]) * pow(2, 8) + bv(comando[1]) + 8) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando[4] != 1 && comando[4] != 2) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        if (comando[4] == 2 && (comando[6] != 79 || comando[7] != 75)) {
+                            comando = null;
+                            Procesando = false;
+                            return;
+                        }
+                        try {
+                            if (!checkSTVCheckSum(comando)) {
+                                comando = null;
+                                Procesando = false;
+                                return;
+                            }
+                        } catch (Exception ex) {
+                            logger.error(ex);
+                        }
+                        try {
+                            if (tmrInfoDesconexionAsinc.isRunning()) {
+                                tmrInfoDesconexionAsinc.stop();
+                            }
+                            STV_ASINC_CONECTADO = true;
+                            STV_ASINC_INTENTOS = 0;
+                            if (comando[4] == 1) {
+                                processSTVASyncCommand(comando);
+                            }
+                            comando = null;
+                            Procesando = false;
+                        } catch (Exception e) {
+                            logger.error(e);
+                        }
+                        return;
+                    }
+                    boolean Procesando;
+                    final STVImpl this$0;
+
+                    {
+                        this$0 = STVImpl.this;
+
+                        Procesando = false;
+                    }
+                };
+                sckSinc.setListener(data);
+                sckAsinc.setListener(data2);
+                clearSTVCommand();
             }
             if (tmrTimeOut == null) {
                 tmrTimeOut = new Timer(TIMEOUT, new ActionListener() {
-                    @Override
+
                     public void actionPerformed(ActionEvent e) {
                         if (Procesando) {
                             return;
@@ -650,7 +610,6 @@ public class STVImpl implements STV {
                                     clearSTVCommand();
                                 } catch (Exception ex) {
                                     logger.error(ex);
-//                            throw new STVException("DRIVER ERROR");
                                 }
                                 if (!tmrInfoDesconexion.isRunning()) {
                                     tmrInfoDesconexion.start();
@@ -673,7 +632,7 @@ public class STVImpl implements STV {
                     }
                 });
                 tmrRefresco = new Timer(10, new ActionListener() {
-                    @Override
+
                     public void actionPerformed(ActionEvent e) {
                         if (Procesando) {
                             return;
@@ -684,7 +643,6 @@ public class STVImpl implements STV {
                             STVLogRefresh();
                         } catch (Exception ex) {
                             logger.error(ex);
-//                            throw new STVException("DRIVER ERROR");
                         }
                         Procesando = false;
                     }
@@ -698,7 +656,7 @@ public class STVImpl implements STV {
                     }
                 });
                 tmrCheckPortAsinc = new Timer(CHECK_ASINCRONO, new ActionListener() {
-                    @Override
+
                     public void actionPerformed(ActionEvent e) {
                         if (Procesando) {
                             return;
@@ -709,7 +667,6 @@ public class STVImpl implements STV {
                             Procesando = false;
                         } catch (Exception ex) {
                             logger.error(ex);
-//                            throw new STVException("DRIVER ERROR");
                         }
                         return;
                     }
@@ -723,7 +680,7 @@ public class STVImpl implements STV {
                     }
                 });
                 tmrInfoDesconexion = new Timer(MAX_DESCONEXION, new ActionListener() {
-                    @Override
+
                     public void actionPerformed(ActionEvent e) {
                         if (Procesando) {
                             return;
@@ -753,8 +710,8 @@ public class STVImpl implements STV {
                         Procesando = true;
                         try {
                             tmrInfoDesconexionAsinc.stop();
-                        } catch (NullPointerException ex) {
-                            logger.error(ex);
+                        } catch (NullPointerException er) {
+                            logger.error(er);
                         } finally {
                             STV_ASINC_CONECTADO = false;
                             Procesando = false;
@@ -789,7 +746,7 @@ public class STVImpl implements STV {
     }
 
     private byte setAsync()
-            throws STVException {
+            throws DriverException {
         if (STV_ASINC_INTENTOS <= 12) {
             STV_ASINC_INTENTOS++;
             tmrCheckPortAsinc.setDelay(TIMEOUT);
@@ -805,8 +762,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpGain(byte channel, boolean e_s, byte gain)
-            throws STVException {
+    @Override
+    public byte setAmpGain(byte channel, boolean e_s, byte gain)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -834,8 +792,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpFilterEnable(byte channel, boolean enable)
-            throws STVException {
+    @Override
+    public byte setAmpFilterEnable(byte channel, boolean enable)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         } else {
@@ -856,8 +815,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpFilter(byte channel, int Frec, byte Gain)
-            throws STVException {
+    @Override
+    public byte setAmpFilter(byte channel, int Frec, byte Gain)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -888,8 +848,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpLimiterEnable(byte channel, boolean enable)
-            throws STVException {
+    @Override
+    public byte setAmpLimiterEnable(byte channel, boolean enable)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         } else {
@@ -910,8 +871,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpThresholdLimiter(byte channel, byte threshold)
-            throws STVException {
+    @Override
+    public byte setAmpThresholdLimiter(byte channel, byte threshold)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -935,8 +897,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpTCLimiter(byte channel, int tc)
-            throws STVException {
+    @Override
+    public byte setAmpTCLimiter(byte channel, int tc)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -960,8 +923,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpDecayLimiter(byte channel, byte decay)
-            throws STVException {
+    @Override
+    public byte setAmpDecayLimiter(byte channel, byte decay)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -985,8 +949,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpEqualizerEnable(byte channel, boolean enable)
-            throws STVException {
+    @Override
+    public byte setAmpEqualizerEnable(byte channel, boolean enable)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         } else {
@@ -1007,8 +972,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpEqualizer(byte channel, byte band, byte boost, int frec, int q_slope, byte gain)
-            throws STVException {
+    @Override
+    public byte setAmpEqualizer(byte channel, byte band, byte boost, int frec, int q_slope, byte gain)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1060,8 +1026,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpToneEnable(byte channel, boolean enable)
-            throws STVException {
+    @Override
+    public byte setAmpToneEnable(byte channel, boolean enable)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         } else {
@@ -1082,8 +1049,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpGainTone(byte channel, byte gain)
-            throws STVException {
+    @Override
+    public byte setAmpGainTone(byte channel, byte gain)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1107,8 +1075,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpFrecTone(byte channel, int frec)
-            throws STVException {
+    @Override
+    public byte setAmpFrecTone(byte channel, int frec)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1132,8 +1101,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpDC(byte channel, short dc)
-            throws STVException {
+    @Override
+    public byte setAmpDC(byte channel, short dc)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1157,8 +1127,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpGainLinearInput(byte channel, short gain)
-            throws STVException {
+    @Override
+    public byte setAmpGainLinearInput(byte channel, short gain)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1182,8 +1153,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpLoudnessEnable(byte channel, boolean enable)
-            throws STVException {
+    @Override
+    public byte setAmpLoudnessEnable(byte channel, boolean enable)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         } else {
@@ -1204,8 +1176,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpChMute(byte channel, boolean mute)
-            throws STVException {
+    @Override
+    public byte setAmpChMute(byte channel, boolean mute)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         } else {
@@ -1226,8 +1199,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setCobraNet(byte channel, int addr_bundle, byte input_ch)
-            throws STVException {
+    @Override
+    public byte setCobraNet(byte channel, int addr_bundle, byte input_ch)
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1257,8 +1231,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpPresets(byte channel, byte action)
-            throws STVException {
+    @Override
+    public byte setAmpPresets(byte channel, byte action)
+            throws DriverException {
         if ((channel < 1 || channel > STV_Info.num_canales) && channel != 80) {
             return 2;
         }
@@ -1282,8 +1257,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setCobraNetSupplyName(byte channel, String nombre)
-            throws STVException, UnsupportedEncodingException {
+    @Override
+    public byte setCobraNetSourceName(byte channel, String nombre)
+            throws DriverException, UnsupportedEncodingException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1309,8 +1285,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setCobraNetZoneName(byte channel, String nombre)
-            throws STVException, UnsupportedEncodingException {
+    @Override
+    public byte setCobraNetZoneName(byte channel, String nombre)
+            throws DriverException, UnsupportedEncodingException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 2;
         }
@@ -1336,8 +1313,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setSTVModel(byte model)
-            throws STVException {
+    @Override
+    public byte setSTVModel(byte model)
+            throws DriverException {
         if (model < 1 || model > 5) {
             return 2;
         } else {
@@ -1351,8 +1329,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setSTVModeLimiter(byte mode)
-            throws STVException {
+    @Override
+    public byte setSTVModeLimiter(byte mode)
+            throws DriverException {
         if (mode > 1) {
             return 2;
         } else {
@@ -1366,8 +1345,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setCM2Enable(boolean enable)
-            throws STVException {
+    @Override
+    public byte setCM2Enable(boolean enable)
+            throws DriverException {
         byte bA_enable[] = new byte[1];
         bA_enable[0] = myCByte(enable);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_ENABLE_CM2, UDP_SET, bA_enable);
@@ -1377,8 +1357,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setSDCardEnable(boolean enable)
-            throws STVException {
+    @Override
+    public byte setSDCardEnable(boolean enable)
+            throws DriverException {
         byte bA_enable[] = new byte[1];
         bA_enable[0] = myCByte(enable);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_ENABLE_SDCARD, UDP_SET, bA_enable);
@@ -1388,8 +1369,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setPowerOn(boolean power_on)
-            throws STVException {
+    @Override
+    public byte setPowerOn(boolean power_on)
+            throws DriverException {
         byte bA_power_on[] = new byte[1];
         bA_power_on[0] = myCByte(power_on);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_POWER_ON, UDP_SET, bA_power_on);
@@ -1399,16 +1381,18 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setSoftwareReset()
-            throws STVException {
+    @Override
+    public byte setSoftwareReset()
+            throws DriverException {
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_SOFTWARE_RESET, UDP_SET, null);
         addSTVCommand(STV_Command);
         STV_Command = null;
         return 1;
     }
 
-    private byte setEtherNetEnable(boolean enable)
-            throws STVException {
+    @Override
+    public byte setEtherNetEnable(boolean enable)
+            throws DriverException {
         byte bA_enable[] = new byte[1];
         bA_enable[0] = myCByte(enable);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_ENABLE_ETHERNET, UDP_SET, bA_enable);
@@ -1418,24 +1402,27 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setFrontalLogo(byte logo[])
-            throws STVException {
+    @Override
+    public byte setFrontalLogo(byte logo[])
+            throws DriverException {
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_FRONTAL_LOGO, UDP_SET, logo);
         addSTVCommand(STV_Command);
         STV_Command = null;
         return 1;
     }
 
-    private byte setDeleteFrontalLogo()
-            throws STVException {
+    @Override
+    public byte setDeleteFrontalLogo()
+            throws DriverException {
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_FRONTAL_BORRAR_LOGO, UDP_SET, null);
         addSTVCommand(STV_Command);
         STV_Command = null;
         return 1;
     }
 
-    private byte setDelayBootSupply(byte delay)
-            throws STVException {
+    @Override
+    public byte setDelayBootSource(byte delay)
+            throws DriverException {
         byte bA_delay[] = new byte[1];
         bA_delay[0] = delay;
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_DELAY_ARRANQUE, UDP_SET, bA_delay);
@@ -1445,8 +1432,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setSensingSupply(boolean enable)
-            throws STVException {
+    @Override
+    public byte setSettingSource(boolean enable)
+            throws DriverException {
         byte bA_enable[] = new byte[1];
         bA_enable[0] = myCByte(enable);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_SENSADO_FUENTE, UDP_SET, bA_enable);
@@ -1456,8 +1444,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpFilterPrio(byte boost, int frec, int q_slope, byte gain)
-            throws STVException {
+    @Override
+    public byte setAmpFilterPrio(byte boost, int frec, int q_slope, byte gain)
+            throws DriverException {
         if (boost < -10 || boost > 10) {
             return 2;
         }
@@ -1495,8 +1484,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpGainLinearPrioInput(short gain)
-            throws STVException {
+    @Override
+    public byte setAmpGainLinearPrioInput(short gain)
+            throws DriverException {
         if (gain < -1500 || gain > 1200) {
             return 2;
         } else {
@@ -1510,8 +1500,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpGainPrio(byte gain)
-            throws STVException {
+    @Override
+    public byte setAmpGainPrio(byte gain)
+            throws DriverException {
         if (gain < -100 || gain > 0) {
             return 2;
         } else {
@@ -1525,8 +1516,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpAllMute(boolean mute)
-            throws STVException {
+    @Override
+    public byte setAmpAllMute(boolean mute)
+            throws DriverException {
         byte bA_mute[] = new byte[1];
         bA_mute[0] = myCByte(mute);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_AMP_MUTE_ALL, UDP_SET, bA_mute);
@@ -1536,8 +1528,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpCobraNetPrio(int addr_bundle, byte input_ch)
-            throws STVException {
+    @Override
+    public byte setAmpCobraNetPrio(int addr_bundle, byte input_ch)
+            throws DriverException {
         if (input_ch > 8) {
             return 2;
         } else {
@@ -1558,8 +1551,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private byte setAmpModeAudioInput(boolean digital_input)
-            throws STVException {
+    @Override
+    public byte setAmpModeAudioInput(boolean digital_input)
+            throws DriverException {
         byte bA_digital_input[] = new byte[1];
         bA_digital_input[0] = myCByte(digital_input);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_AMP_MODE_AUDIO_INPUT, UDP_SET, bA_digital_input);
@@ -1569,8 +1563,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpCobraNetPrioModeEnable(boolean enable)
-            throws STVException {
+    @Override
+    public byte setAmpCobraNetPrioModeEnable(boolean enable)
+            throws DriverException {
         byte bA_enable[] = new byte[1];
         bA_enable[0] = myCByte(enable);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_AMP_ENABLE_COBRANET_PRIO, UDP_SET, bA_enable);
@@ -1580,8 +1575,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpModePrioActive(boolean signal_presense)
-            throws STVException {
+    @Override
+    public byte setAmpModePrioActive(boolean signal_presense)
+            throws DriverException {
         byte bA_signal_presense[] = new byte[1];
         bA_signal_presense[0] = myCByte(signal_presense);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_AMP_MODE_ACTIVE_PRIO, UDP_SET, bA_signal_presense);
@@ -1591,8 +1587,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpLevelPrioActive(boolean High)
-            throws STVException {
+    @Override
+    public byte setAmpLevelPrioActive(boolean High)
+            throws DriverException {
         byte bA_High[] = new byte[1];
         bA_High[0] = myCByte(High);
         byte STV_Command[] = convertCommand2STVProtocol(STV_COMMAND_SET_AMP_LEVEL_ACTIVE_PRIO, UDP_SET, bA_High);
@@ -1602,8 +1599,9 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private byte setAmpThresHoldActivePrio(byte threshold)
-            throws STVException {
+    @Override
+    public byte setAmpThresHoldActivePrio(byte threshold)
+            throws DriverException {
         if (threshold < -100 || threshold > 20) {
             return 2;
         } else {
@@ -1617,8 +1615,9 @@ public class STVImpl implements STV {
         }
     }
 
-    private String getSTVLog()
-            throws STVException {
+    @Override
+    public String getSTVLog()
+            throws DriverException {
         String Cadena = "";
         String aux = "";
         for (byte i = 0; i <= 49 && bv(STV_Info.Log[i][0]) != 255; i++) {
@@ -1678,7 +1677,7 @@ public class STVImpl implements STV {
     }
 
     private void processSTVSyncCommand(byte comando[])
-            throws STVException {
+            throws DriverException {
         byte backup[] = new byte[comando.length + 1];
         byte numComando[] = new byte[2];
         System.arraycopy(comando, 0, backup, 0, comando.length);
@@ -1693,7 +1692,7 @@ public class STVImpl implements STV {
     }
 
     private void processSTVASyncCommand(byte comando[])
-            throws STVException {
+            throws DriverException {
         byte numComando[] = new byte[2];
         numComando[0] = comando[3];
         numComando[1] = comando[2];
@@ -1701,7 +1700,7 @@ public class STVImpl implements STV {
     }
 
     private void processSTVInfo(byte Comando[])
-            throws STVException {
+            throws DriverException {
         int aux = 0;
         int k = 8;
         byte arrayAux[] = new byte[4];
@@ -2162,7 +2161,7 @@ public class STVImpl implements STV {
     }
 
     private void processSTVLog(byte Comando[])
-            throws STVException {
+            throws DriverException {
         byte k = 8;
         if (Comando[6] == 79 && Comando[7] == 75) {
             for (byte i = 0; i <= 49; i++) {
@@ -2177,7 +2176,7 @@ public class STVImpl implements STV {
     }
 
     private void sendSTVCommand()
-            throws STVException, InterruptedException {
+            throws DriverException, InterruptedException {
         if (Procesandosend) {
             return;
         }
@@ -2198,21 +2197,21 @@ public class STVImpl implements STV {
     }
 
     private void STVInfoRefresh()
-            throws STVException {
+            throws DriverException {
         byte STV_Command[] = convertCommand2STVProtocol(1, UDP_GET, null);
         addSTVCommand(STV_Command);
         STV_Command = null;
     }
 
     private void STVLogRefresh()
-            throws STVException {
+            throws DriverException {
         byte STV_Command[] = convertCommand2STVProtocol(2, UDP_GET, null);
         addSTVCommand(STV_Command);
         STV_Command = null;
     }
 
     private boolean compareByteArray(byte array1[], byte array2[])
-            throws STVException {
+            throws DriverException {
         if (array1 == null || array2 == null) {
             return false;
         }
@@ -2235,7 +2234,7 @@ public class STVImpl implements STV {
     }
 
     private byte[] convertCommand2STVProtocol(int Command, byte RW, byte Param[])
-            throws STVException {
+            throws DriverException {
         STVProtocolo trama = new STVProtocolo();
         byte cabecera[] = new byte[6];
         trama.Size = 0;
@@ -2282,7 +2281,7 @@ public class STVImpl implements STV {
         }
     }
 
-    private void addSTVCommand(byte command[]) throws STVException {
+    private void addSTVCommand(byte command[]) {
         int Pos = 0;
         try {
             Semaforo_Lista_STV.acquire();
@@ -2300,9 +2299,8 @@ public class STVImpl implements STV {
                 }
 
             }
-        } catch (Exception ex) {
-            logger.error(ex);
-            throw new STVException("DRIVER ERROR");
+        } catch (Exception e) {
+            logger.error(e);
         }
         if (Pos != 0 && list_Command_STV.size() >= Pos) {
             list_Command_STV.add(Pos, command);
@@ -2312,7 +2310,7 @@ public class STVImpl implements STV {
         Semaforo_Lista_STV.release();
     }
 
-    private void addSTVCommandGain(byte command[]) throws STVException {
+    private void addSTVCommandGain(byte command[]) {
         int Pos = 0;
         try {
             Semaforo_Lista_STV.acquire();
@@ -2333,9 +2331,8 @@ public class STVImpl implements STV {
                 }
 
             }
-        } catch (Exception ex) {
-            logger.error(ex);
-            throw new STVException("DRIVER ERROR");
+        } catch (Exception e) {
+            logger.error(e);
         }
         if (Pos != 0 && list_Command_STV.size() >= Pos) {
             list_Command_STV.add(Pos, command);
@@ -2345,7 +2342,7 @@ public class STVImpl implements STV {
         Semaforo_Lista_STV.release();
     }
 
-    private void addSTVCommandChannel(byte command[]) throws STVException {
+    private void addSTVCommandChannel(byte command[]) {
         int Pos = 0;
         try {
             Semaforo_Lista_STV.acquire();
@@ -2366,9 +2363,8 @@ public class STVImpl implements STV {
                 }
 
             }
-        } catch (Exception ex) {
-            logger.error(ex);
-            throw new STVException("DRIVER ERROR");
+        } catch (Exception e) {
+            logger.error(e);
         }
         if (Pos != 0 && list_Command_STV.size() >= Pos) {
             list_Command_STV.add(Pos, command);
@@ -2379,7 +2375,7 @@ public class STVImpl implements STV {
     }
 
     private boolean checkSTVCheckSum(byte Command[])
-            throws STVException {
+            throws DriverException {
         byte checksum = Command[5];
         int size = bv(Command[0]) * pow(2, 8) + bv(Command[1]);
         long sum = bv(Command[0]);
@@ -2399,22 +2395,22 @@ public class STVImpl implements STV {
     }
 
     private byte myCByte(boolean a)
-            throws STVException {
+            throws DriverException {
         return (byte) (a ? 1 : 0);
     }
 
     private int myCUShort(short a)
-            throws STVException {
+            throws DriverException {
         return a >= 0 ? a : 0x10000 + a;
     }
 
     private short myCShort(int a)
-            throws STVException {
+            throws DriverException {
         return (short) (a <= 32767 ? a : a - 0x10000);
     }
 
     private long bytesToUInt32(byte Array[], int Offset)
-            throws STVException {
+            throws DriverException {
         long r = 0L;
         byte aux[] = new byte[4];
         if (Array == null) {
@@ -2432,7 +2428,7 @@ public class STVImpl implements STV {
     }
 
     private short bytesToInt16(byte Array[], int Offset)
-            throws STVException {
+            throws DriverException {
         short r = 0;
         byte aux[] = new byte[2];
         if (Array == null) {
@@ -2450,7 +2446,7 @@ public class STVImpl implements STV {
     }
 
     private byte getCM2StateByChannel(byte channel, byte ab, byte ic)
-            throws STVException {
+            throws DriverException {
         if (channel < 1 || channel > STV_Info.num_canales) {
             return 0;
         }
@@ -2475,7 +2471,8 @@ public class STVImpl implements STV {
         return 1;
     }
 
-    private boolean isIp(String ip) {
+    @Override
+    public boolean isIp(String ip) {
         String n = "\\.(([1-9]?[0-9])|(1[0-9]{2})|(2([0-4][0-9]|5[0-5])))";
         String m = "\\.((1[6-9])|(2[0-9])|(3[01]))";
         if (ip.matches((new StringBuilder()).append("^192\\.168(").append(n).append("){2}$").toString())) {
@@ -2574,8 +2571,8 @@ public class STVImpl implements STV {
         return v.length;
     }
     private Semaphore Semaforo_Lista_STV;
-    private IUdp sckSinc;
-    private IUdp sckAsinc;
+    private Udp sckSinc;
+    private Udp sckAsinc;
     private Timer tmrTimeOut;
     private Timer tmrRefresco;
     private Timer tmrCheckPortAsinc;
