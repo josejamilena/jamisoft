@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="file:/C:/Users/Jose%20Antonio/Documents/NetBeansProjects/LDA_CORE_SYSTEM_TEST/dist/" href="launch.jnlp" spec="1.0+">
+    <information>
+        <title>LDA_CORE_SYSTEM_TEST</title>
+        <vendor>www.lda.es</vendor>
+        <homepage href="www.lda.es"/>
+        <description>LDA_CORE_SYSTEM_TEST</description>
+        <description kind="short">LDA_CORE_SYSTEM_TEST</description>
+        
+        
+    <icon href="splash.jpg" kind="splash"/>
+<icon href="icono.jpg" kind="default"/>
+<offline-allowed/>
+</information>
+    <update check="background"/>
+    <security>
+<all-permissions/>
+</security>
+    <resources>
+        <j2se version="1.6+"/>
+        <jar href="LDA_CORE_SYSTEM_TEST.jar" main="true"/>
+        
+        
+    <jar href="lib/es.lda.core.lib.driver.stv.jar"/>
+<jar href="lib/es.lda.core.jar"/>
+<jar href="lib/napkinlaf-alpha001.jar"/>
+<jar href="lib/log4j-1.2.16.jar"/>
+</resources>
+    <application-desc main-class="es.lda.cobi.stv.CobiVentana">
+        
+    </application-desc>
+</jnlp>

@@ -16,5 +16,5 @@ public interface DataEvent {
      * Event.
      * @param size short.
      */
-    public void dataArrival(short size) throws GUIEvent;
+    public void dataArrival(short size);
 }

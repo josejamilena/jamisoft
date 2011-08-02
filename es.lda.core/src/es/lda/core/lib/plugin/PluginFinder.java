@@ -83,8 +83,6 @@ public class PluginFinder {
                     }
                 }
             }
-        } catch (NullPointerException ex) {
-            logger.error(ex);
         } catch (IOException ex) {
             logger.error(ex);
         } finally {

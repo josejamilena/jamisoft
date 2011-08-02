@@ -1,12 +1,9 @@
 package es.lda.cobi.stv;
 
 import es.lda.core.exception.DriverException;
-import es.lda.core.exception.UnsupportedDriverOperation;
-import es.lda.core.lib.driver.IDriver;
 import es.lda.core.lib.driver.stv.STV;
 import es.lda.core.lib.driver.stv.impl.STVImpl;
 import es.lda.core.lib.driver.stv.impl.STVInfo;
-import es.lda.core.lib.plugin.PluginFinder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -33,7 +29,7 @@ public class CobiVentana extends javax.swing.JFrame {
     private static final ResourceBundle config = ResourceBundle.getBundle("resources.config");
     private final String VERDE = config.getString("OK_COLOR");
     private final String ROJO = config.getString("ERROR_COLOR");
-    public static IDriver etapa = null; //new STVImpl();
+    private STV etapa = new STVImpl();
     private boolean Automatico = false;
     private boolean Conectado = false;
     private Timer tmrConectado;
@@ -1923,9 +1919,6 @@ public class CobiVentana extends javax.swing.JFrame {
         try {
             //etapa.dispose();
             etapa.exec("dispose", null, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2000,9 +1993,6 @@ public class CobiVentana extends javax.swing.JFrame {
                             Conectado = false;
                         }
                     }
-                } catch (UnsupportedDriverOperation ex) {
-                    logger.error(ex);
-                    JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (DriverException ex) {
                     //Link Apagado
                     logger.error(ex);
@@ -2187,9 +2177,7 @@ public class CobiVentana extends javax.swing.JFrame {
                     Automatico = true;
 
                     Procesando = false;
-                } catch (UnsupportedDriverOperation ex) {
-                    logger.error(ex);
-                    JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
                 } catch (UnsupportedEncodingException ex) {
                     logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2211,9 +2199,6 @@ public class CobiVentana extends javax.swing.JFrame {
             //this.etapa.dispose();
             etapa.exec("dispose", null, null);
             Runtime.getRuntime().exit(0);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2238,12 +2223,9 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = txtIP.getText();
             Byte tempResInt = (Byte) (etapa.exec("connect", tempArgs, null))[0];
             if (tempResInt != 1) {
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(null, config.getString("CONNECTION_ERROR"), config.getString("CRITICAL_ERROR"), 0);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2266,12 +2248,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Short.toString((short) cv(tkbGainLinearInput1.getValue()));
                 etapa.exec("setAmpGainLinearInput", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2292,12 +2271,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Short.toString((short) cv(tkbGainLinearInputPrio.getValue()));
                 etapa.exec("setAmpGainLinearPrioInput", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2320,12 +2296,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[1] = Boolean.toString(true);
                 tempArgs[2] = Byte.toString((byte) cv(tkbGainInput1.getValue()));
                 etapa.exec("setAmpGain", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2348,12 +2321,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[1] = Boolean.toString(false);
                 tempArgs[2] = Byte.toString((byte) cv(tkbGainOutput1.getValue()));
                 etapa.exec("setAmpGain", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2383,9 +2353,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[4] = Integer.toString(cv(nudEqInputQ_Slope1.getValue()));
             tempArgs[5] = Byte.toString((byte) cv(tkbEqInputGain1.getValue()));
             etapa.exec("setAmpEqualizer", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2415,9 +2382,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[4] = Integer.toString(cv(nudEqInputQ_Slope1.getValue()));
             tempArgs[5] = Byte.toString((byte) cv(tkbEqInputGain1.getValue()));
             etapa.exec("setAmpEqualizer", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2447,9 +2411,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[4] = Integer.toString(cv(nudEqInputQ_Slope1.getValue()));
             tempArgs[5] = Byte.toString((byte) cv(tkbEqInputGain1.getValue()));
             etapa.exec("setAmpEqualizer", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2482,12 +2443,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[4] = Integer.toString(cv(nudEqInputQ_Slope1.getValue()));
                 tempArgs[5] = Byte.toString((byte) cv(tkbEqInputGain1.getValue()));
                 etapa.exec("setAmpEqualizer", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2516,9 +2474,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[4] = Integer.toString(cv(nudEqInputQ_Slope1.getValue()));
             tempArgs[5] = Byte.toString((byte) cv(tkbEqInputGain1.getValue()));
             etapa.exec("setAmpEqualizer", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2539,9 +2494,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Boolean.toString(cbool((byte) cv(nudEqInputEnable1.getValue())));
             etapa.exec("setAmpEqualizerEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2562,9 +2514,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Boolean.toString(cbool((byte) cv(nudEnableLoudNess1.getValue())));
             etapa.exec("setAmpLoudnessEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2584,9 +2533,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Byte.toString((byte) cv(nudEnableLimiter1.getValue()));
             etapa.exec("setSTVModeLimiter", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2607,9 +2553,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Boolean.toString(cbool((byte) cv(nudEnableFilter1.getValue())));
             etapa.exec("setAmpFilterEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2630,9 +2573,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Boolean.toString(cbool((byte) cv(nudEnableTone1.getValue())));
             etapa.exec("setAmpToneEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2653,9 +2593,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Integer.toString(cv(nudTCLimiter1.getValue()));
             etapa.exec("setAmpTCLimiter", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2676,10 +2613,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Byte.toString((byte) cv(nudDecayLimiter1.getValue()));
             etapa.exec("setAmpDecayLimiter", tempArgs, null);
-
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2700,9 +2633,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Byte.toString((byte) cv(nudThresHoldLimiter1.getValue()));
             etapa.exec("setAmpThresholdLimiter", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2724,9 +2654,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[1] = Integer.toString(cv(nudFreqFilter1.getValue()));
             tempArgs[2] = Byte.toString((byte) cv(tkbGainFilter1.getValue()));
             etapa.exec("setAmpFilter", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2751,12 +2678,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[1] = Integer.toString(cv(nudFreqFilter1.getValue()));
                 tempArgs[2] = Byte.toString((byte) cv(tkbGainFilter1.getValue()));
                 etapa.exec("setAmpFilter", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2775,9 +2699,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Integer.toString(cv(nudFreqTone1.getValue()));
             etapa.exec("setAmpFrecTone", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2801,12 +2722,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Byte.toString((byte) cv(tkbGainTone1.getValue()));
                 etapa.exec("setAmpGainTone", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2828,12 +2746,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Short.toString((short) cv(tkbDC1.getValue()));
                 etapa.exec("setAmpDC", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2854,12 +2769,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Byte.toString((byte) cv(tkbGainInputPrio.getValue()));
                 etapa.exec("setAmpGainPrio", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2884,9 +2796,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[2] = Integer.toString(cv(nudFilterPrioQ_Slope.getValue()));
             tempArgs[3] = Byte.toString((byte) cv(tkbFilterPrioGain.getValue()));
             etapa.exec("setAmpFilterPrio", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2909,9 +2818,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[2] = Integer.toString(cv(nudFilterPrioQ_Slope.getValue()));
             tempArgs[3] = Byte.toString((byte) cv(tkbFilterPrioGain.getValue()));
             etapa.exec("setAmpFilterPrio", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2938,9 +2844,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[2] = Integer.toString(cv(nudFilterPrioQ_Slope.getValue()));
             tempArgs[3] = Byte.toString((byte) cv(tkbFilterPrioGain.getValue()));
             etapa.exec("setAmpFilterPrio", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -2966,12 +2869,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 tempArgs[2] = Integer.toString(cv(nudFilterPrioQ_Slope.getValue()));
                 tempArgs[3] = Byte.toString((byte) cv(tkbFilterPrioGain.getValue()));
                 etapa.exec("setAmpFilterPrio", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -2990,9 +2890,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = Boolean.toString(chkMute.isSelected());
             etapa.exec("setAmpChMute", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3007,28 +2904,31 @@ public class CobiVentana extends javax.swing.JFrame {
         }
 
         tmrRefresco.stop();
-        try {
-            if (chkCobraNetPrio.isSelected()) {
+        if (chkCobraNetPrio.isSelected()) {
+            try {
 //                etapa.setAmpCobraNetPrio(cv(nudAddr_bundle.getValue()), (byte) cv(nudInput_channel.getValue()));
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Integer.toString(cv(nudAddr_bundle.getValue()));
                 tempArgs[1] = Byte.toString((byte) cv(nudInput_channel.getValue()));
                 etapa.exec("setAmpCobraNetPrio", tempArgs, null);
-            } else {
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            try {
 //                etapa.setCobraNet((byte) cv(nudChannel.getValue()), cv(nudAddr_bundle.getValue()), (byte) cv(nudInput_channel.getValue()));
                 String[] tempArgs = new String[3];
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Integer.toString(cv(nudAddr_bundle.getValue()));
                 tempArgs[2] = Byte.toString((byte) cv(nudInput_channel.getValue()));
                 etapa.exec("setCobraNet", tempArgs, null);
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (DriverException ex) {
-            logger.error(ex);
-            //                    System.err.println("-->AQUI-->");
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         tmrRefresco.start();
     }//GEN-LAST:event_nudAddr_bundleStateChanged
@@ -3037,29 +2937,33 @@ public class CobiVentana extends javax.swing.JFrame {
         if (!(Automatico)) {
             return;
         }
-        try {
-            tmrRefresco.stop();
-            if (chkCobraNetPrio.isSelected()) {
+
+        tmrRefresco.stop();
+        if (chkCobraNetPrio.isSelected()) {
+            try {
 //                etapa.setAmpCobraNetPrio(cv(nudAddr_bundle.getValue()), (byte) cv(nudInput_channel.getValue()));
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Integer.toString(cv(nudAddr_bundle.getValue()));
                 tempArgs[1] = Byte.toString((byte) cv(nudInput_channel.getValue()));
                 etapa.exec("setAmpCobraNetPrio", tempArgs, null);
-            } else {
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            try {
 //                etapa.setCobraNet((byte) cv(nudChannel.getValue()), cv(nudAddr_bundle.getValue()), (byte) cv(nudInput_channel.getValue()));
                 String[] tempArgs = new String[3];
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Integer.toString(cv(nudAddr_bundle.getValue()));
                 tempArgs[2] = Byte.toString((byte) cv(nudInput_channel.getValue()));
                 etapa.exec("setCobraNet", tempArgs, null);
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (DriverException ex) {
-            logger.error(ex);
-            //                    System.err.println("-->AQUI-->");
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         tmrRefresco.start();
     }//GEN-LAST:event_nudInput_channelStateChanged
@@ -3076,9 +2980,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = txtCobraNetNombreFuente.getText();
             etapa.exec("setCobraNetSupplyName", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3099,9 +3000,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = txtCobraNetNombreZona.getText();
             etapa.exec("setCobraNetZoneName", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3116,27 +3014,30 @@ public class CobiVentana extends javax.swing.JFrame {
         }
 
         tmrRefresco.stop();
-        try {
-            if (chkPresetsPrio.isSelected()) {
+        if (chkPresetsPrio.isSelected()) {
+            try {
 //                etapa.setAmpPresets((byte) 'P', (byte) 1);
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Byte.toString((byte) 'P');
                 tempArgs[1] = Byte.toString((byte) 1);
                 etapa.exec("setAmpPresets", tempArgs, null);
-            } else {
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            try {
 //                etapa.setAmpPresets((byte) cv(nudChannel.getValue()), (byte) 1);
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Byte.toString((byte) 1);
                 etapa.exec("setAmpPresets", tempArgs, null);
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (DriverException ex) {
-            logger.error(ex);
-            //                    System.err.println("-->AQUI-->");
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         tmrRefresco.start();
     }//GEN-LAST:event_btnCargaDefaultMouseClicked
@@ -3147,27 +3048,30 @@ public class CobiVentana extends javax.swing.JFrame {
         }
 
         tmrRefresco.stop();
-        try {
-            if (chkPresetsPrio.isSelected()) {
+        if (chkPresetsPrio.isSelected()) {
+            try {
 //                etapa.setAmpPresets((byte) 'P', (byte) 2);
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Byte.toString((byte) 'P');
                 tempArgs[1] = Byte.toString((byte) 2);
                 etapa.exec("setAmpPresets", tempArgs, null);
-            } else {
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            try {
 //                etapa.setAmpPresets((byte) cv(nudChannel.getValue()), (byte) 2);
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Byte.toString((byte) 2);
                 etapa.exec("setAmpPresets", tempArgs, null);
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (DriverException ex) {
-            logger.error(ex);
-            //                    System.err.println("-->AQUI-->");
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         tmrRefresco.start();
     }//GEN-LAST:event_btnGuardarDefaultMouseClicked
@@ -3178,27 +3082,30 @@ public class CobiVentana extends javax.swing.JFrame {
         }
 
         tmrRefresco.stop();
-        try {
-            if (chkPresetsPrio.isSelected()) {
+        if (chkPresetsPrio.isSelected()) {
+            try {
 //                etapa.setAmpPresets((byte) 'P', (byte) 3);
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Byte.toString((byte) 'P');
                 tempArgs[1] = Byte.toString((byte) 3);
                 etapa.exec("setAmpPresets", tempArgs, null);
-            } else {
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            try {
 //                etapa.setAmpPresets((byte) cv(nudChannel.getValue()), (byte) 3);
                 String[] tempArgs = new String[2];
                 tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
                 tempArgs[1] = Byte.toString((byte) 3);
                 etapa.exec("setAmpPresets", tempArgs, null);
+            } catch (DriverException ex) {
+                logger.error(ex);
+    //                    System.err.println("-->AQUI-->");
+                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (DriverException ex) {
-            logger.error(ex);
-            //                    System.err.println("-->AQUI-->");
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         tmrRefresco.start();
     }//GEN-LAST:event_btnCargarFabricaMouseClicked
@@ -3214,9 +3121,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(chkPuertaRuidoPrio.isSelected());
             etapa.exec("setAmpModePrioActive", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3236,9 +3140,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(chkManiobra5vPrio.isSelected());
             etapa.exec("setAmpLevelPrioActive", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3258,9 +3159,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Byte.toString((byte) cv(nudUmbralPuertaRuido.getValue()));
             etapa.exec("setAmpThresHoldActivePrio", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3280,9 +3178,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(chkConfiguracionEntradaDigital.isSelected());
             etapa.exec("setAmpModeAudioInput", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3303,9 +3198,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = txtCobraNetNombreFuente.getText();
             etapa.exec("setCobraNetSupplyName", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3326,9 +3218,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Byte.toString((byte) cv(nudChannel.getValue()));
             tempArgs[1] = txtCobraNetNombreZona.getText();
             etapa.exec("setCobraNetZoneName", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3349,12 +3238,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Byte.toString((byte) 1);
                 etapa.exec("setSTVModel", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -3375,12 +3261,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Byte.toString((byte) 2);
                 etapa.exec("setSTVModel", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -3401,12 +3284,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Byte.toString((byte) 3);
                 etapa.exec("setSTVModel", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -3427,12 +3307,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Byte.toString((byte) 4);
                 etapa.exec("setSTVModel", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -3453,12 +3330,9 @@ public class CobiVentana extends javax.swing.JFrame {
                 String[] tempArgs = new String[1];
                 tempArgs[0] = Byte.toString((byte) 5);
                 etapa.exec("setSTVModel", tempArgs, null);
-            } catch (UnsupportedDriverOperation ex) {
-                logger.error(ex);
-                JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } catch (DriverException ex) {
                 logger.error(ex);
-                //                    System.err.println("-->AQUI-->");
+    //                    System.err.println("-->AQUI-->");
                 JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
             tmrRefresco.start();
@@ -3474,9 +3348,6 @@ public class CobiVentana extends javax.swing.JFrame {
             if ((byte) cv(nudChannel.getValue()) > tempSTVInfo.num_canales) {
                 nudChannel.setValue(tempSTVInfo.num_canales);
             }
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3495,9 +3366,6 @@ public class CobiVentana extends javax.swing.JFrame {
             tempArgs[0] = Boolean.toString(chkCobraNet.isSelected());
             etapa.exec("setCM2Enable", tempArgs, null);
 //            etapa.setCM2Enable(chkCobraNet.isSelected());
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3519,9 +3387,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(chkSDCard.isSelected());
             etapa.exec("setSDCardEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3543,9 +3408,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(chkPower_On.isSelected());
             etapa.exec("setPowerOn", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3565,9 +3427,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(chkEnableCobraNetPrio.isSelected());
             etapa.exec("setAmpCobraNetPrioModeEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3585,9 +3444,6 @@ public class CobiVentana extends javax.swing.JFrame {
         try {
 //            etapa.setSoftwareReset();
             etapa.exec("setSoftwareReset", null, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3607,9 +3463,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Boolean.toString(ckEnableEtherNet.isSelected());
             etapa.exec("setEtherNetEnable", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //                    System.err.println("-->AQUI-->");
@@ -3627,9 +3480,6 @@ public class CobiVentana extends javax.swing.JFrame {
         try {
             //            etapa.setDeleteFrontalLogo();
             etapa.exec("setDeleteFrontalLogo", null, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //            System.err.println("-->AQUI-->");
@@ -3649,9 +3499,6 @@ public class CobiVentana extends javax.swing.JFrame {
             String[] tempArgs = new String[1];
             tempArgs[0] = Byte.toString((byte) cv(nudDelayArranque.getValue()));
             etapa.exec("setDelayBootSupply", tempArgs, null);
-        } catch (UnsupportedDriverOperation ex) {
-            logger.error(ex);
-            JOptionPane.showMessageDialog(CobiVentana.this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (DriverException ex) {
             logger.error(ex);
 //            System.err.println("-->AQUI-->");
@@ -3669,29 +3516,17 @@ public class CobiVentana extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
-        try {
-            PropertyConfigurator.configure(config.getString("LOG4J.PROPERTIES"));
-            logger.info("Locale" + " (" + Locale.getDefault().getDisplayLanguage() + ", " + Locale.getDefault().getDisplayCountry() + ").");
+        PropertyConfigurator.configure(config.getString("LOG4J.PROPERTIES"));
+        logger.info("Locale" + " (" + Locale.getDefault().getDisplayLanguage() + ", " + Locale.getDefault().getDisplayCountry() + ").");
 
-          //  PluginFinder pluginFinder = new PluginFinder();    
-          //  etapa = (IDriver) (pluginFinder.searchImpl("./lib", config.getString("STV"))).newInstance();
-            etapa = new STVImpl();
-            
-            java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
 
-                @Override
-                public void run() {
-                    CobiVentana w = new CobiVentana(config.getString("LOOK_AND_FEEL"));
-                    w.setVisible(true);
-                }
-            });
-        } catch (NullPointerException ex) {
-            logger.error(ex);
-//        } catch (InstantiationException ex) {
-//            logger.error(ex);
-//        } catch (IllegalAccessException ex) {
-//            logger.error(ex);
-        }
+            @Override
+            public void run() {
+                CobiVentana w = new CobiVentana(config.getString("LOOK_AND_FEEL"));
+                w.setVisible(true);
+            }
+        });
     }
 
     private byte myCByte(boolean a) {

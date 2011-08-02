@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
  */
 public interface STV extends IDriver{            
     
-    /*byte connect(String IP) throws STVException;
+    byte connect(String IP) throws STVException;
 
     void dispose() throws STVException, InterruptedException;
 
@@ -109,6 +109,6 @@ public interface STV extends IDriver{
 
     byte setSensingSupply(boolean enable) throws STVException;
 
-    byte setSoftwareReset() throws STVException;*/
+    byte setSoftwareReset() throws STVException;
    
 }
