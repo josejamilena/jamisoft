@@ -1,0 +1,301 @@
+[2011-28-04 02:28,     0]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,     7]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,     7]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - dispose
+ [2011-28-04 02:28,   340]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   340]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   341]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - connect
+ [2011-28-04 02:28,   341]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - [Ljava.lang.String;@243680c1
+ [2011-28-04 02:28,   341]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   367]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,   368]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   368]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  1339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  1339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  1339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  2339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  2341]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  2341]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  3339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  3339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  3340]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  4339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  4339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  4339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  5339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  5339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  5339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  6339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  6339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  6339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  7339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  7339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  7340]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  8339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  8339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  8339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  9339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  9339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  9339]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,     0]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,     5]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,     5]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - dispose
+ [2011-28-04 02:28,   523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   524]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - connect
+ [2011-28-04 02:28,   524]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - [Ljava.lang.String;@4883d37a
+ [2011-28-04 02:28,   525]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   589]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,   589]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,   589]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  1523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  1523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  1524]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  2523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  2526]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  2526]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  3523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  3523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  3523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  4523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  4523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  4523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  5523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  5523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  5523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  6523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  6523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  6523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  7523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  7523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  7523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  8523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  8523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  8523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  9523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28,  9523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28,  9524]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 10523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 10523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 10523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 11523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 11523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 11524]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 12523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 12523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 12523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 13523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 13523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 13523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 14523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 14523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 14523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 15523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 15523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 15523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 16523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 16523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 16523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 17523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 17523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 17523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 18523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 18523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 18523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 19523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 19523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 19523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 20523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 20523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 20523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 21523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 21523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 21523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 22523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 22523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 22523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 23523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-28-04 02:28, 23523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-28-04 02:28, 23523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 24523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24523]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - dispose
+ [2011-29-04 02:29, 24667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24769]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - connect
+ [2011-29-04 02:29, 24769]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - [Ljava.lang.String;@4545f5e3
+ [2011-29-04 02:29, 24769]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24776]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 24777]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 24777]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 25667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 25667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 25668]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 26667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 26667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 26667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 27667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 27667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 27667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 28667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 28667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 28667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 29667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 29667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 29667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 30667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 30667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 30667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 31667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 31667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 31667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 32667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 32667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 32667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 33667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 33667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 33667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 34667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 34667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 34667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 35667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 35667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 35667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 36667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 36667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 36667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 37667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 37667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 37667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 38667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 38667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 38667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 39667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 39667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 39667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 40667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 40667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 40667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 41667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 41667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 41667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 42667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 42667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 42667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 43667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 43667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 43667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 44667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 44667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 44667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 45667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 45667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 45667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 46667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 46667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 46667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 47671]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 47672]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 47672]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 48667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 48667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 48667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 49667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 49667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 49667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 50667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 50667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 50667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 51667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 51667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 51667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 52667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 52667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 52667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 53667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 53667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 53667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 54667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 54667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 54667]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55547]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - dispose
+ [2011-29-04 02:29, 55547]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55547]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55649]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - connect
+ [2011-29-04 02:29, 55649]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - [Ljava.lang.String;@4fb595f3
+ [2011-29-04 02:29, 55649]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55656]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 55656]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55657]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55851]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - dispose
+ [2011-29-04 02:29, 55851]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55852]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55953]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - connect
+ [2011-29-04 02:29, 55953]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - [Ljava.lang.String;@45b3278a
+ [2011-29-04 02:29, 55953]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55961]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 55961]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 55961]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 56131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - dispose
+ [2011-29-04 02:29, 56131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 56131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 56233]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - connect
+ [2011-29-04 02:29, 56233]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - [Ljava.lang.String;@3ec19fbf
+ [2011-29-04 02:29, 56233]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 56240]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 56240]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 56240]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 57131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 57131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 57131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 58131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 58131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 58131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 59131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 59131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 59131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 60131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 60131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 60131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 61131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 61131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 61131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 62131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 62131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 62131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 63131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 63131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 63131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 64131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 64131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 64131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 65131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 65131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 65131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 66131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 66131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 66131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 67131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 67131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 67131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 68131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 68131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 68131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 69131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 69131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 69131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 70131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 70131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 70131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 71131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 71131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 71132]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 72131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 72131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 72131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 73131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - getAsyncConnect
+ [2011-29-04 02:29, 73131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ [2011-29-04 02:29, 73131]DEBUG es.lda.core.lib.driver.stv.impl.STVImpl [AWT-EventQueue-0] - 
+ 
